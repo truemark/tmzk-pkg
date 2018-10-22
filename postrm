@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/usr/sbin/userdel tmzk 2> /dev/null >/dev/null
+rm -rf /var/log/tmzk
+exit 0

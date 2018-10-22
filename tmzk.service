@@ -1,0 +1,12 @@
+[Unit]
+Description=TrueMark Apache Zookeeper
+After=syslog.target
+
+[Service]
+User=tmzk
+Type=forking
+SuccessExitStatus=143
+ExecStart=/opt/tmzk/bin/zkServer.sh start
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+systemctl stop tmzk.service 1> /dev/null 2>&1
+systemctl disable tmzk.service 1> /dev/null 2>&1
+rm -f /etc/systemd/system/tmzk.service
+systemctl daemon-reload
+systemctl reset-failed 
+
+exit 0
