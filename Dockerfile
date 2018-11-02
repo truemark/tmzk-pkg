@@ -15,16 +15,16 @@ RUN mkdir -p tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk && \
     cp zookeeper-${ZOOVERS}/bin/*.sh tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/bin && \
     chmod +x tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/bin/*.sh && \
     mkdir -p tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/conf && \ 
-    cp zookeeper-${ZOOVERS}/zookeeper-3.4.13.jar* tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk && \
+    cp zookeeper-${ZOOVERS}/zookeeper-3.4.13.jar tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk && \
     mkdir tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/lib && \
-    cp -R zookeeper-${ZOOVERS}/lib/*.jar tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/lib
+    cp -R zookeeper-${ZOOVERS}/lib/*.jar tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/lib && \
+    cp zookeeper-${ZOOVERS}/LICENSE.txt tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/LICENSE
 
 COPY java.env tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/conf/
 COPY log4j.properties tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/conf/
 COPY zoo_sample.cfg tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/conf/
-COPY tmzk.service tmzk-${ZOOVERS}-${MINORVERS}/etc/systemd/system/tmzk.service
+COPY tmzk.service tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk/tmzk.service
 
-RUN chown root:root tmzk-${ZOOVERS}-${MINORVERS}/etc/systemd/system/tmzk.service
 RUN chown -R root:root tmzk-${ZOOVERS}-${MINORVERS}/opt/tmzk
 
 RUN echo "Package: tmzk \n\
@@ -35,7 +35,7 @@ Architecture: all \n\
 Depends: openjdk-8-jre-headless (>= 8u181-b13-0ubuntu0.18.04.1) \n\
 Maintainer: TrueMark <support@truemark.io> \n\
 Description: TrueMark Apache Zookeeper \n\
- Zookeeper installation for TrueMark Kafka as a Service platform. " > tmzk-${ZOOVERS}-${MINORVERS}/DEBIAN/control
+ Apache Zookeeper installation for TrueMark service platform. " > tmzk-${ZOOVERS}-${MINORVERS}/DEBIAN/control
 
 COPY postinst tmzk-${ZOOVERS}-${MINORVERS}/DEBIAN/
 COPY preinst tmzk-${ZOOVERS}-${MINORVERS}/DEBIAN/
